@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.indigo,
         accentColor: Colors.indigoAccent,
+        brightness: Brightness.dark,
       ),
     );
   }
@@ -46,6 +47,7 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
 
   @override
   Widget build(BuildContext context) {
+    final TextStyle textStyle = Theme.of(context).textTheme.headline6;
     return Scaffold(
       appBar: AppBar(
         title: Text('Simple Interest Calculator'),
@@ -58,10 +60,12 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
             _getTextField(
               labelText: 'Principal',
               hintText: 'Enter Principal e.g. 12000',
+              textStyle: textStyle,
             ),
             _getTextField(
               labelText: 'Rate of interest',
               hintText: 'In percent',
+              textStyle: textStyle,
             ),
             Padding(
               padding: EdgeInsets.only(
@@ -74,6 +78,7 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
                     child: _getTextField(
                       labelText: 'Term',
                       hintText: 'Time in years',
+                      textStyle: textStyle,
                     ),
                   ),
                   Container(
@@ -121,7 +126,8 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
     );
   }
 
-  Widget _getTextField({String labelText, String hintText}) {
+  Widget _getTextField(
+      {String labelText, String hintText, TextStyle textStyle}) {
     return Padding(
       padding: EdgeInsets.only(
         top: _minimumPadding,
@@ -136,6 +142,7 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
             borderRadius: BorderRadius.circular(5.0),
           ),
         ),
+        style: textStyle,
       ),
     );
   }
