@@ -28,6 +28,19 @@ class SimpleInterestCalculator extends StatefulWidget {
 
 class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
   final double _minimumPadding = 5.0;
+  final List<String> _currencies = [
+    'Rupiah',
+    'Dollars',
+    'Ringgit',
+    'Yuan',
+    'Dirham'
+  ];
+  String _currentCurrency;
+  @override
+  void initState() {
+    super.initState();
+    _currentCurrency = _currencies[0];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +66,7 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
                 top: _minimumPadding,
                 bottom: _minimumPadding,
               ),
+              child: _getDropdownButton(),
             )
           ],
         ),
@@ -91,6 +105,23 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _getDropdownButton() {
+    return DropdownButton(
+      value: _currentCurrency,
+      items: _currencies.map((String value) {
+        return DropdownMenuItem(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      onChanged: (String value) {
+        setState(() {
+          _currentCurrency = value;
+        });
+      },
     );
   }
 }
