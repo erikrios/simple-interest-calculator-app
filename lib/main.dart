@@ -66,8 +66,37 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
                 top: _minimumPadding,
                 bottom: _minimumPadding,
               ),
-              child: _getDropdownButton(),
-            )
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: _getTextField(
+                      labelText: 'Term',
+                      hintText: 'Time in years',
+                    ),
+                  ),
+                  Container(
+                    width: _minimumPadding * 5,
+                  ),
+                  Expanded(
+                    child: _getDropdownButton(),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: _getRaisedButton(
+                    buttonText: 'Calculate',
+                  ),
+                ),
+                Expanded(
+                  child: _getRaisedButton(
+                    buttonText: 'Reset',
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
@@ -122,6 +151,19 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
           _currentCurrency = value;
         });
       },
+    );
+  }
+
+  Widget _getRaisedButton({String buttonText = 'Button'}) {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: _minimumPadding,
+        bottom: _minimumPadding,
+      ),
+      child: RaisedButton(
+        child: Text(buttonText),
+        onPressed: () {},
+      ),
     );
   }
 }
