@@ -218,4 +218,12 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
         'After $term years, your investment will be worth $totalAmountPayable $_currentCurrency';
     return result;
   }
+
+  void _reset() {
+    principalController.text = "";
+    roiController.text = "";
+    termController.text = "";
+    _result = "";
+    _currentCurrency = _currencies[0];
+  }
 }
