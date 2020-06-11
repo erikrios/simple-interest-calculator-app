@@ -57,69 +57,72 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
       appBar: AppBar(
         title: Text('Simple Interest Calculator'),
       ),
-      body: Container(
-        margin: EdgeInsets.all(_minimumPadding * 2),
-        child: ListView(
-          children: <Widget>[
-            _getCalculatorLogo(),
-            _getTextField(
-              labelText: 'Principal',
-              hintText: 'Enter Principal e.g. 12000',
-              textStyle: textStyle,
-              controller: principalController,
-            ),
-            _getTextField(
-              labelText: 'Rate of interest',
-              hintText: 'In percent',
-              textStyle: textStyle,
-              controller: roiController,
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                top: _minimumPadding,
-                bottom: _minimumPadding,
+      body: Form(
+        key: _formKey,
+        child: Container(
+          margin: EdgeInsets.all(_minimumPadding * 2),
+          child: ListView(
+            children: <Widget>[
+              _getCalculatorLogo(),
+              _getTextField(
+                labelText: 'Principal',
+                hintText: 'Enter Principal e.g. 12000',
+                textStyle: textStyle,
+                controller: principalController,
               ),
-              child: Row(
+              _getTextField(
+                labelText: 'Rate of interest',
+                hintText: 'In percent',
+                textStyle: textStyle,
+                controller: roiController,
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  top: _minimumPadding,
+                  bottom: _minimumPadding,
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: _getTextField(
+                        labelText: 'Term',
+                        hintText: 'Time in years',
+                        textStyle: textStyle,
+                        controller: termController,
+                      ),
+                    ),
+                    Container(
+                      width: _minimumPadding * 5,
+                    ),
+                    Expanded(
+                      child: _getDropdownButton(),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
                 children: <Widget>[
                   Expanded(
-                    child: _getTextField(
-                      labelText: 'Term',
-                      hintText: 'Time in years',
-                      textStyle: textStyle,
-                      controller: termController,
+                    child: _getRaisedButton(
+                      buttonText: 'Calculate',
+                      color: Theme.of(context).accentColor,
+                      textColor: Theme.of(context).primaryColorDark,
+                      onPressedHandler: () => _result = _calculateTotalResult(),
                     ),
                   ),
-                  Container(
-                    width: _minimumPadding * 5,
-                  ),
                   Expanded(
-                    child: _getDropdownButton(),
+                    child: _getRaisedButton(
+                      buttonText: 'Reset',
+                      color: Theme.of(context).primaryColorDark,
+                      textColor: Theme.of(context).primaryColorLight,
+                      onPressedHandler: () => _reset(),
+                    ),
                   ),
                 ],
               ),
-            ),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: _getRaisedButton(
-                    buttonText: 'Calculate',
-                    color: Theme.of(context).accentColor,
-                    textColor: Theme.of(context).primaryColorDark,
-                    onPressedHandler: () => _result = _calculateTotalResult(),
-                  ),
-                ),
-                Expanded(
-                  child: _getRaisedButton(
-                    buttonText: 'Reset',
-                    color: Theme.of(context).primaryColorDark,
-                    textColor: Theme.of(context).primaryColorLight,
-                    onPressedHandler: () => _reset(),
-                  ),
-                ),
-              ],
-            ),
-            _getResultText(),
-          ],
+              _getResultText(),
+            ],
+          ),
         ),
       ),
     );
