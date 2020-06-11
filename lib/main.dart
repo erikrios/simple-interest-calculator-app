@@ -36,6 +36,8 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
     'Dirham'
   ];
   String _currentCurrency;
+  String _result = "";
+
   @override
   void initState() {
     super.initState();
@@ -97,6 +99,7 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
                 ),
               ],
             ),
+            _getResultText(),
           ],
         ),
       ),
@@ -112,7 +115,7 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
     );
     return Container(
       margin: EdgeInsets.all(
-        _minimumPadding * 5,
+        _minimumPadding * 10,
       ),
       child: image,
     );
@@ -163,6 +166,15 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
       child: RaisedButton(
         child: Text(buttonText),
         onPressed: () {},
+      ),
+    );
+  }
+
+  Widget _getResultText() {
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.all(_minimumPadding * 2),
+        child: Text(_result),
       ),
     );
   }
