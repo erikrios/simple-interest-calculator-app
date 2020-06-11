@@ -45,6 +45,10 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
     _currentCurrency = _currencies[0];
   }
 
+  TextEditingController principalController = TextEditingController();
+  TextEditingController roiController = TextEditingController();
+  TextEditingController termController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final TextStyle textStyle = Theme.of(context).textTheme.headline6;
@@ -61,11 +65,13 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
               labelText: 'Principal',
               hintText: 'Enter Principal e.g. 12000',
               textStyle: textStyle,
+              controller: principalController,
             ),
             _getTextField(
               labelText: 'Rate of interest',
               hintText: 'In percent',
               textStyle: textStyle,
+              controller: roiController,
             ),
             Padding(
               padding: EdgeInsets.only(
@@ -79,6 +85,7 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
                       labelText: 'Term',
                       hintText: 'Time in years',
                       textStyle: textStyle,
+                      controller: termController,
                     ),
                   ),
                   Container(
@@ -131,13 +138,17 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
   }
 
   Widget _getTextField(
-      {String labelText, String hintText, TextStyle textStyle}) {
+      {String labelText,
+      String hintText,
+      TextStyle textStyle,
+      TextEditingController controller}) {
     return Padding(
       padding: EdgeInsets.only(
         top: _minimumPadding,
         bottom: _minimumPadding,
       ),
       child: TextField(
+        controller: controller,
         keyboardType: TextInputType.number,
         decoration: InputDecoration(
           labelText: labelText,
