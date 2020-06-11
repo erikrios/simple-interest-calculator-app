@@ -28,6 +28,7 @@ class SimpleInterestCalculator extends StatefulWidget {
 }
 
 class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
+  var _formKey = GlobalKey<FormState>();
   final double _minimumPadding = 5.0;
   final List<String> _currencies = [
     'Rupiah',
