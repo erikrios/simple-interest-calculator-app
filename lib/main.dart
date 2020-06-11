@@ -176,7 +176,10 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
         bottom: _minimumPadding,
       ),
       child: RaisedButton(
-        child: Text(buttonText),
+        child: Text(
+          buttonText,
+          textScaleFactor: 1.5,
+        ),
         onPressed: () {},
         color: color,
         textColor: textColor,
