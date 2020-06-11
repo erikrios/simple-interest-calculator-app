@@ -104,6 +104,7 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
                     buttonText: 'Calculate',
                     color: Theme.of(context).accentColor,
                     textColor: Theme.of(context).primaryColorDark,
+                    onPressedHandler: () => _result = _calculateTotalResult(),
                   ),
                 ),
                 Expanded(
@@ -111,6 +112,7 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
                     buttonText: 'Reset',
                     color: Theme.of(context).primaryColorDark,
                     textColor: Theme.of(context).primaryColorLight,
+                    onPressedHandler: () => _reset(),
                   ),
                 ),
               ],
@@ -180,7 +182,10 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
   }
 
   Widget _getRaisedButton(
-      {String buttonText = 'Button', Color color, Color textColor}) {
+      {String buttonText = 'Button',
+      Color color,
+      Color textColor,
+      Function onPressedHandler}) {
     return Padding(
       padding: EdgeInsets.only(
         top: _minimumPadding,
@@ -191,7 +196,11 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
           buttonText,
           textScaleFactor: 1.5,
         ),
-        onPressed: () {},
+        onPressed: () {
+          setState(() {
+            onPressedHandler();
+          });
+        },
         color: color,
         textColor: textColor,
       ),
