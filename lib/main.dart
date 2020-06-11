@@ -64,17 +64,19 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
           child: ListView(
             children: <Widget>[
               _getCalculatorLogo(),
-              _getTextField(
+              _getTextFormField(
                 labelText: 'Principal',
                 hintText: 'Enter Principal e.g. 12000',
                 textStyle: textStyle,
                 controller: principalController,
+                validatorMessage: 'Please enter principal amount',
               ),
-              _getTextField(
+              _getTextFormField(
                 labelText: 'Rate of interest',
                 hintText: 'In percent',
                 textStyle: textStyle,
                 controller: roiController,
+                validatorMessage: 'Please enter rate of interest',
               ),
               Padding(
                 padding: EdgeInsets.only(
@@ -84,11 +86,12 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
                 child: Row(
                   children: <Widget>[
                     Expanded(
-                      child: _getTextField(
+                      child: _getTextFormField(
                         labelText: 'Term',
                         hintText: 'Time in years',
                         textStyle: textStyle,
                         controller: termController,
+                        validatorMessage: 'Please enter time',
                       ),
                     ),
                     Container(
@@ -107,7 +110,10 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
                       buttonText: 'Calculate',
                       color: Theme.of(context).accentColor,
                       textColor: Theme.of(context).primaryColorDark,
-                      onPressedHandler: () => _result = _calculateTotalResult(),
+                      onPressedHandler: () {
+                        if (_formKey.currentState.validate())
+                          _result = _calculateTotalResult();
+                      },
                     ),
                   ),
                   Expanded(
@@ -143,17 +149,18 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
     );
   }
 
-  Widget _getTextField(
+  Widget _getTextFormField(
       {String labelText,
       String hintText,
       TextStyle textStyle,
-      TextEditingController controller}) {
+      TextEditingController controller,
+      String validatorMessage}) {
     return Padding(
       padding: EdgeInsets.only(
         top: _minimumPadding,
         bottom: _minimumPadding,
       ),
-      child: TextField(
+      child: TextFormField(
         controller: controller,
         keyboardType: TextInputType.number,
         decoration: InputDecoration(
@@ -162,8 +169,12 @@ class _SimpleInterestCalculatorState extends State<SimpleInterestCalculator> {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5.0),
           ),
+          errorStyle: TextStyle(color: Colors.yellowAccent),
         ),
         style: textStyle,
+        validator: (String value) {
+          if (value.isEmpty) return validatorMessage;
+        },
       ),
     );
   }
